@@ -20,6 +20,11 @@ public class DocumentDto {
      * Title.
      */
     private String title;
+
+    /**
+     * Score.
+     */
+    private String score;
     
     /**
      * Description.
@@ -134,6 +139,14 @@ public class DocumentDto {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 
     public String getDescription() {

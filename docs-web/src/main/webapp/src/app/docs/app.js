@@ -355,6 +355,15 @@ angular.module('docs',
         }
       }
     })
+    .state('document.view.score', {
+      url: '/score',
+      views: {
+        'tab': {
+          templateUrl: 'partial/docs/document.view.score.html',
+          controller: 'DocumentViewScore'
+        }
+      }
+    })
     .state('login', {
       url: '/login?redirectState&redirectParams',
       views: {
