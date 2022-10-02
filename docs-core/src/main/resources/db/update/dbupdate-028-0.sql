@@ -1,11 +1,6 @@
-create table T_SCORE (
-    SCORE_ID_C varchar(36) not null,
-    ADMIN_ID_C varchar(36)  not null,
-    ADMIN_USERNAME_C varchar(50) not null,
-    DOCUMENT_ID_C varchar(36) not null,
-    SCORE_I int not null,
-    SUBMITTED_B bit not null,
-    primary key (SCORE_ID_C),
-    foreign key (ADMIN_ID_C) references T_USER(USE_ID_C),
-    foreign key (DOCUMENT_ID_C) references T_DOCUMENT(DOC_ID_C)
-);
+create memory table T_SCORE (SCO_ID_C varchar(36) not null, SCO_IDUSER_C varchar(36) not null, SCO_IDDOC_C varchar(36) not null, SCO_USERNAME_C varchar(50) not null, SCO_VAL_C varchar(10) not null, primary key (SCO_ID_C));
+
+alter table T_SCORE add constraint FK_SCO_IDUSER_C foreign key (SCO_IDUSER_C) references T_USER (USE_ID_C) on delete restrict on update restrict;
+alter table T_SCORE add constraint FK_SCO_IDDOC_C foreign key (SCO_IDDOC_C) references T_DOCUMENT (DOC_ID_C) on delete restrict on update restrict;
+
+update T_CONFIG set CFG_VALUE_C = '28' where CFG_ID_C = 'DB_VERSION';
