@@ -207,6 +207,7 @@ public class DocumentResource extends BaseResource {
         document.add("coverage", JsonUtil.nullable(documentDto.getCoverage()));
         document.add("rights", JsonUtil.nullable(documentDto.getRights()));
         document.add("creator", documentDto.getCreator());
+        document.add("score",documentDto.getScore());
 
         // Add ACL
         AclUtil.addAcls(document, documentId, getTargetIdList(shareId));
@@ -760,6 +761,7 @@ public class DocumentResource extends BaseResource {
         Document document = new Document();
         document.setUserId(principal.getId());
         document.setTitle(title);
+        document.setScore("0");
         document.setDescription(description);
         document.setSubject(subject);
         document.setIdentifier(identifier);

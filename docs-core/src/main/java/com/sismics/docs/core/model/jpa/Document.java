@@ -46,6 +46,12 @@ public class Document implements Loggable {
      */
     @Column(name = "DOC_TITLE_C", nullable = false, length = 100)
     private String title;
+
+    /**
+     * Score
+     */
+    @Column(name = "DOC_SCORE_C", nullable = false, length = 500)
+    private String score;
     
     /**
      * Description.
@@ -116,6 +122,7 @@ public class Document implements Loggable {
     /**
      * Deletion date.
      */
+
     @Column(name = "DOC_DELETEDATE_D")
     private Date deleteDate;
     
@@ -158,6 +165,14 @@ public class Document implements Loggable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 
     public String getDescription() {

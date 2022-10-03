@@ -1,0 +1,18 @@
+<div ng-if="userInfo.base_functions.indexOf('ADMIN') != -1">
+    <p class="well-sm">{{ 'document.view.score.message' | translate }}</p>
+    <div id="scoreDiv"> Current score: {{document.score}} </div>
+    <div id="errorMsg"> </div>
+
+
+    <div hidden id="documentId">{{document.id}}</div>
+  <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+    <input id="scoreContent" name="score" type="text" size="30" placeholder="add new score here" ng-model="documentscore.score">
+    <button class="btn btn-primary" type="submit" id="addBtn" ng-click="addScore()"> submit </button>
+  </form>
+
+</div>
+
+<div ng-if="userInfo.base_functions.indexOf('ADMIN') == -1">
+    <div> Scoring feature is reserved for admins. If you need this functionality, please contact your admin for access.</div>
+
+</div>

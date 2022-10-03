@@ -148,6 +148,11 @@
       "activity": {
         "activity": "Activity",
         "message": "Every actions on this document are logged here."
+      },
+      "score": {
+        "score": "Score",
+        "message": "Enter the score for this document below",
+        "add_score": "Add score out of 100 here"
       }
     },
     "edit": {
