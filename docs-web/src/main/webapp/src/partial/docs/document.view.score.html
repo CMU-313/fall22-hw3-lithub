@@ -5,7 +5,7 @@
 
 
     <div hidden id="documentId">{{document.id}}</div>
-  <form #myForm="ngForm" (ngSubmit)="onSubmit()" ng-if="document.getElementById('popup').style.visibility === 'hidden'"> <!-- add condition for noScore -->
+  <form #myForm="ngForm" (ngSubmit)="onSubmit()" ng-if="document.noScore"> <!-- add condition for noScore -->
     <input id="scoreContent" name="score" type="text" size="30" placeholder="add new score here" ng-model="documentscore.score">
     <button class="btn btn-primary" type="submit" id="addBtn" onclick="submitFn()"> submit </button>
   </form>
