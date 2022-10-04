@@ -1,4 +1,5 @@
 package com.sismics.docs.rest.resource;
+     
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
@@ -17,6 +18,7 @@ import com.sismics.docs.core.event.DocumentUpdatedAsyncEvent;
 import com.sismics.docs.core.event.FileDeletedAsyncEvent;
 import com.sismics.docs.core.model.context.AppContext;
 import com.sismics.docs.core.model.jpa.Document;
+import com.sismics.docs.core.model.jpa.Score;
 import com.sismics.docs.core.model.jpa.File;
 import com.sismics.docs.core.model.jpa.User;
 import com.sismics.docs.core.util.*;
@@ -84,7 +86,7 @@ public class DocumentScoreResource extends BaseResource {
 
     @POST
     @Path("{documentId: [a-z0-9\\-]+}")
-    public Response score(
+    public Response postScore(
             @PathParam("documentId") String documentId,
             @FormParam("score") String score) {
         if (!authenticate()) {
@@ -94,16 +96,18 @@ public class DocumentScoreResource extends BaseResource {
         // Get the document
         DocumentDao documentDao = new DocumentDao();
         Document myDocument = documentDao.getById(documentId);
-
-        //set document score
-        myDocument.setScore(score);
-        documentDao.update(myDocument, principal.getId());
+        
+        // create the row for this score in the database
+        Score newScore = new Score();
+        newScore.setScore(Integer.parseInt(score));
+        newScore.setUserId(principal.getId());
+        newScore.setDocumentId(documentId);
+        ScoreDao scoreDao = new ScoreDao();
+        scoreDao.create(newScore);
 
         // Always return OK
         JsonObjectBuilder response = Json.createObjectBuilder()
                 .add("status", "ok");
         return Response.ok().entity(response.build()).build();
     }
-
-    
 }
