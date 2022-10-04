@@ -5,10 +5,16 @@
 
 
     <div hidden id="documentId">{{document.id}}</div>
-  <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+  <form #myForm="ngForm" (ngSubmit)="onSubmit()" ng-if="document.getElementById('popup').style.visibility === 'hidden'"> <!-- add condition for noScore -->
     <input id="scoreContent" name="score" type="text" size="30" placeholder="add new score here" ng-model="documentscore.score">
-    <button class="btn btn-primary" type="submit" id="addBtn" ng-click="addScore()"> submit </button>
+    <button class="btn btn-primary" type="submit" id="addBtn" onclick="submitFn()"> submit </button>
   </form>
+  <div id="popup" style="visibility: hidden" > 
+    <span> Are you sure you want to submit your score? Once you submit, you will not be able to edit your submission. </span>
+    <button class="btn btn-primary" type="submit" id="submitBtn" onclick="addScore()"> submit </button>
+    <!-- use onclick if ng-click doesn't work, update addScore to make visibility of this component none when it runs-->
+    <button class="btn btn-primary" type="submit" id="cancelBtn" onclick="cancelFn()"> cancel </button>
+  </div>
 
 </div>
 
@@ -16,3 +22,15 @@
     <div> Scoring feature is reserved for admins. If you need this functionality, please contact your admin for access.</div>
 
 </div>
+
+<script> 
+
+function cancelFn() {
+  document.getElementById("popup").style.visibility = "hidden";
+}
+
+function submitFn() {
+  document.getElementById("popup").style.visibility = "visible";
+}
+
+</script>
