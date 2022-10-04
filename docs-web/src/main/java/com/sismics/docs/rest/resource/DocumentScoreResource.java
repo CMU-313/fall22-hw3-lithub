@@ -1,5 +1,6 @@
 package com.sismics.docs.rest.resource;
      
+
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -95,7 +96,7 @@ public class DocumentScoreResource extends BaseResource {
         // Get the document
         DocumentDao documentDao = new DocumentDao();
         Document myDocument = documentDao.getById(documentId);
-
+        
         // create the row for this score in the database
         Score newScore = new Score();
         newScore.setScore(Integer.parseInt(score));
@@ -103,10 +104,6 @@ public class DocumentScoreResource extends BaseResource {
         newScore.setDocumentId(documentId);
         ScoreDao scoreDao = new ScoreDao();
         scoreDao.create(newScore);
-
-        //set document score
-        // myDocument.setScore(score);
-        // documentDao.update(myDocument, principal.getId());
 
         // Always return OK
         JsonObjectBuilder response = Json.createObjectBuilder()
