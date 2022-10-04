@@ -208,6 +208,7 @@ public class DocumentResource extends BaseResource {
         document.add("coverage", JsonUtil.nullable(documentDto.getCoverage()));
         document.add("rights", JsonUtil.nullable(documentDto.getRights()));
         document.add("creator", documentDto.getCreator());
+        
         //document.add("score",documentDto.getScore());
         ScoreDao scoreDao = new ScoreDao();
         boolean noScore = true;
