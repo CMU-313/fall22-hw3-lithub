@@ -210,7 +210,7 @@ public class DocumentResource extends BaseResource {
         document.add("creator", documentDto.getCreator());
         //document.add("score",documentDto.getScore());
         ScoreDao scoreDao = new ScoreDao();
-        boolean noScore = false;
+        boolean noScore = true;
         JsonArrayBuilder scores = Json.createArrayBuilder();
         int total = 0, count = 0;
         for (Score score : scoreDao.getByDocumentId(documentId)) {
