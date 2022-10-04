@@ -1,5 +1,5 @@
 package com.sismics.docs.rest.resource;
-     
+
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
@@ -86,6 +86,7 @@ public class DocumentScoreResource extends BaseResource {
 
     @POST
     @Path("{documentId: [a-z0-9\\-]+}")
+    
     public Response postScore(
             @PathParam("documentId") String documentId,
             @FormParam("score") String score) {
@@ -96,6 +97,11 @@ public class DocumentScoreResource extends BaseResource {
         // Get the document
         DocumentDao documentDao = new DocumentDao();
         Document myDocument = documentDao.getById(documentId);
+
+
+        //set document score
+        //myDocument.setScore(score);
+        //documentDao.update(myDocument, principal.getId());
         
         // create the row for this score in the database
         Score newScore = new Score();
@@ -110,4 +116,5 @@ public class DocumentScoreResource extends BaseResource {
                 .add("status", "ok");
         return Response.ok().entity(response.build()).build();
     }
+
 }
