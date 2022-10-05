@@ -220,6 +220,7 @@ public class DocumentResource extends BaseResource {
             User user = userDao.getById(score.getUserId());
             if (score.getUserId() == principal.getId()) {
                 noScore = false;
+                document.add("currAdminScore", score.getScore());
                 document.add("currentUsername", user.getUsername());
             }
             scores.add(Json.createObjectBuilder()
@@ -230,7 +231,7 @@ public class DocumentResource extends BaseResource {
         if (count == 0) {
             document.add("average", "NA");
         } else {
-            document.add("average", String.valueOf(total * 1.0f / count));
+            document.add("average", String.valueOf(count * 1.0f / total));
         }
         document.add("scores", scores);
         document.add("noScore", noScore);
