@@ -5,16 +5,16 @@
 
 
     <div hidden id="documentId">{{document.id}}</div>
-  <form #myForm="ngForm" (ngSubmit)="onSubmit()" ng-if="document.noScore"> <!-- add condition for noScore -->
+  <form #myForm="ngForm" id="form" (ngSubmit)="onSubmit()" ng-if="document.noScore" style="visibility: visible">
     <input id="scoreContent" name="score" type="text" size="30" placeholder="add new score here" ng-model="documentscore.score">
     <button class="btn btn-primary" type="submit" id="addBtn" onclick="submitFn()"> submit </button>
   </form>
-  <div id="popup" style="visibility: hidden" > 
+  <form #myForm="ngForm" id="popup" (ngSubmit)="onSubmit()" style="visibility: hidden" > 
     <span> Are you sure you want to submit your score? Once you submit, you will not be able to edit your submission. </span>
-    <button class="btn btn-primary" type="submit" id="submitBtn" onclick="addScore()"> submit </button>
+    <button class="btn btn-primary" type="submit" id="submitBtn" ng-click="addScore()"> submit </button>
     <!-- use onclick if ng-click doesn't work, update addScore to make visibility of this component none when it runs-->
     <button class="btn btn-primary" type="submit" id="cancelBtn" onclick="cancelFn()"> cancel </button>
-  </div>
+  </form>
 
 </div>
 
@@ -27,9 +27,11 @@
 
 function cancelFn() {
   document.getElementById("popup").style.visibility = "hidden";
+  document.getElementById("form").style.visibility = "visible";
 }
 
 function submitFn() {
+  document.getElementById("form").style.visibility = "hidden";
   document.getElementById("popup").style.visibility = "visible";
 }
 

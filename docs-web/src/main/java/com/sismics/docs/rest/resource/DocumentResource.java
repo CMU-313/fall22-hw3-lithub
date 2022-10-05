@@ -233,7 +233,7 @@ public class DocumentResource extends BaseResource {
             document.add("average", String.valueOf(total * 1.0f / count));
         }
         document.add("scores", scores);
-        document.add("showPopup", false);
+        document.add("noScore", noScore);
 
         // Add ACL
         AclUtil.addAcls(document, documentId, getTargetIdList(shareId));
