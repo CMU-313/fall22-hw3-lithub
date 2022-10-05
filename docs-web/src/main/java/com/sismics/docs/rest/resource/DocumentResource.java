@@ -788,7 +788,7 @@ public class DocumentResource extends BaseResource {
         Document document = new Document();
         document.setUserId(principal.getId());
         document.setTitle(title);
-        document.setScore("0");
+        //document.setScore("0");
         document.setDescription(description);
         document.setSubject(subject);
         document.setIdentifier(identifier);
