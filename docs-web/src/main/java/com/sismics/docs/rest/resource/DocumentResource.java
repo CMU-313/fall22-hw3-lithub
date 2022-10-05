@@ -209,7 +209,6 @@ public class DocumentResource extends BaseResource {
         document.add("rights", JsonUtil.nullable(documentDto.getRights()));
         document.add("creator", documentDto.getCreator());
         
-        //document.add("score",documentDto.getScore());
         ScoreDao scoreDao = new ScoreDao();
         boolean noScore = true;
         JsonArrayBuilder scores = Json.createArrayBuilder();
@@ -788,7 +787,6 @@ public class DocumentResource extends BaseResource {
         Document document = new Document();
         document.setUserId(principal.getId());
         document.setTitle(title);
-        document.setScore("0");
         document.setDescription(description);
         document.setSubject(subject);
         document.setIdentifier(identifier);
