@@ -797,7 +797,7 @@ public class DocumentResource extends BaseResource {
         document.setType(type);
         document.setCoverage(coverage);
         document.setRights(rights);
-        docuzment.setLanguage(language);
+        document.setLanguage(language);
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
