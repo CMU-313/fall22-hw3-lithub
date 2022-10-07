@@ -116,6 +116,7 @@ public class Document implements Loggable {
     /**
      * Deletion date.
      */
+
     @Column(name = "DOC_DELETEDATE_D")
     private Date deleteDate;
     

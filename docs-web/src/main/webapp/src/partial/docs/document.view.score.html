@@ -1,0 +1,51 @@
+<div ng-if="userInfo.base_functions.indexOf('ADMIN') != -1">
+
+
+    <div ng-if="!document.noScore"> 
+        <span>The score you submitted for this document is: {{document.currAdminScore}}</span><br> 
+        <span>The average score for this document across all admins is: {{document.average}}</span>
+    </div>
+
+
+
+    <div ng-if="document.noScore"> 
+        <p class="well-sm">{{ 'document.view.score.message' | translate }}</p>
+    </div>
+
+
+
+    <!--<div id="scoreDiv"> Current score: {{document.score}} </div>-->
+    <div id="errorMsg"> </div>
+
+    <div hidden id="documentId">{{document.id}}</div>
+  <form #myForm="ngForm" id="form" (ngSubmit)="onSubmit()" ng-if="document.noScore" style="visibility: visible">
+    <input id="scoreContent" name="score" type="text" size="30" placeholder="add new score here" ng-model="documentscore.score">
+    <button class="btn btn-primary" type="submit" id="addBtn" onclick="submitFn()"> submit </button>
+  </form>
+  <form #myForm="ngForm" id="popup" (ngSubmit)="onSubmit()" style="visibility: hidden" > 
+    <span> Are you sure you want to submit your score? Once you submit, you will not be able to edit your submission. </span>
+    <button class="btn btn-primary" type="submit" id="submitBtn" ng-click="addScore()"> submit </button>
+    <!-- use onclick if ng-click doesn't work, update addScore to make visibility of this component none when it runs-->
+    <button class="btn btn-primary" type="submit" id="cancelBtn" onclick="cancelFn()"> cancel </button>
+  </form>
+
+</div>
+
+<div ng-if="userInfo.base_functions.indexOf('ADMIN') == -1">
+    <div> Scoring feature is reserved for admins. If you need this functionality, please contact your admin for access.</div>
+
+</div>
+
+<script> 
+
+function cancelFn() {
+  document.getElementById("popup").style.visibility = "hidden";
+  document.getElementById("form").style.visibility = "visible";
+}
+
+function submitFn() {
+  document.getElementById("form").style.visibility = "hidden";
+  document.getElementById("popup").style.visibility = "visible";
+}
+
+</script>

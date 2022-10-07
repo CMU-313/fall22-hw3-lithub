@@ -17,6 +17,7 @@ import com.sismics.docs.core.event.DocumentUpdatedAsyncEvent;
 import com.sismics.docs.core.event.FileDeletedAsyncEvent;
 import com.sismics.docs.core.model.context.AppContext;
 import com.sismics.docs.core.model.jpa.Document;
+import com.sismics.docs.core.model.jpa.Score;
 import com.sismics.docs.core.model.jpa.File;
 import com.sismics.docs.core.model.jpa.User;
 import com.sismics.docs.core.util.*;
@@ -207,6 +208,33 @@ public class DocumentResource extends BaseResource {
         document.add("coverage", JsonUtil.nullable(documentDto.getCoverage()));
         document.add("rights", JsonUtil.nullable(documentDto.getRights()));
         document.add("creator", documentDto.getCreator());
+        
+        ScoreDao scoreDao = new ScoreDao();
+        boolean noScore = true;
+        JsonArrayBuilder scores = Json.createArrayBuilder();
+        int total = 0, count = 0;
+        for (Score score : scoreDao.getByDocumentId(documentId)) {
+            total += 1;
+            count += score.getScore();
+            UserDao userDao = new UserDao();
+            User user = userDao.getById(score.getUserId());
+            if (score.getUserId() == principal.getId()) {
+                noScore = false;
+                document.add("currAdminScore", score.getScore());
+                document.add("currentUsername", user.getUsername());
+            }
+            scores.add(Json.createObjectBuilder()
+                      .add("id", score.getId())
+                      .add("score", score.getScore())
+                      .add("reviewer", user.getUsername()));
+        }
+        if (count == 0) {
+            document.add("average", "NA");
+        } else {
+            document.add("average", String.valueOf(count * 1.0f / total));
+        }
+        document.add("scores", scores);
+        document.add("noScore", noScore);
 
         // Add ACL
         AclUtil.addAcls(document, documentId, getTargetIdList(shareId));
